@@ -8,6 +8,12 @@ using Abp.Runtime.Caching;
 using Abp.Zero.Configuration;
 using fruitShop.Authorization.Users;
 
+/*
+ * Roles within the application
+ * Static Roles: Pre-defined roles that can not be deleted. Eg. Admin
+ * Dynamic Roles: Roles that are created once the application has been reployed. The roles can then be assigned or deleted. Eg. Intern
+ */
+
 namespace fruitShop.Authorization.Roles
 {
     public class RoleManager : AbpRoleManager<Role, User>

@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\fruitsShop.Domain\fruitsShop.Domain.csproj" />
     <ProjectReference Include="..\fruitShop.Core\fruitShop.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

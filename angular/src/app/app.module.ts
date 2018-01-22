@@ -13,6 +13,8 @@ import { AbpModule } from '@abp/abp.module';
 
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { SharedModule } from '@shared/shared.module';
+import { RouterModule } from '@angular/router';
+
 
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
@@ -32,6 +34,9 @@ import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
 import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { MaterialInput } from '@shared/directives/material-input.directive';
+import { FruitComponent } from './fruit/fruit.component';
+import { AddFruitComponent } from './fruit/add-fruit/add-fruit.component';
+import { EditFruitComponent } from './fruit/edit-fruit/edit-fruit.component';
 
 @NgModule({
     declarations: [
@@ -53,6 +58,10 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         SideBarNavComponent,
         SideBarFooterComponent,
         RightSideBarComponent,
+        FruitComponent,
+        AddFruitComponent,
+        EditFruitComponent,
+
     
     ],
     imports: [
@@ -65,7 +74,8 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         AppRoutingModule,
         ServiceProxyModule,
         SharedModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+
     ],
     providers: [
 

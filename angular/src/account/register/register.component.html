@@ -40,8 +40,8 @@
             </div>
 
             <div class="form-actions">
-                <button [disabled]="saving" [routerLink]="['../login']" type="button" class="btn btn-default m-t-20">{{l("Back")}}</button>
-                <button type="submit" class="btn btn-success right-float m-t-20" [disabled]="!registerForm.form.valid">{{l("Submit")}}</button>
+                <button [routerLink]="['../login']" type="button" class="btn btn-default m-t-20">{{l("Back")}}</button>
+                <button type="submit" class="btn btn-success right-float m-t-20" [disabled]="!registerForm.form.valid" (click)="save()">{{l("Submit")}}</button>
             </div>
 
         </form>

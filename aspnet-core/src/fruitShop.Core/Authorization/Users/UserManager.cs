@@ -12,6 +12,8 @@ using Abp.Organizations;
 using Abp.Runtime.Caching;
 using fruitShop.Authorization.Roles;
 
+/*Manage your users*/
+
 namespace fruitShop.Authorization.Users
 {
     public class UserManager : AbpUserManager<Role, User>

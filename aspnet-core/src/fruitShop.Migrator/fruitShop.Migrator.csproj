@@ -18,6 +18,7 @@
     <PackageReference Include="Abp.Castle.Log4Net" Version="3.3.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\fruitsShop.Domain\fruitsShop.Domain.csproj" />
     <ProjectReference Include="..\fruitShop.Core\fruitShop.Core.csproj" />
     <ProjectReference Include="..\fruitShop.EntityFrameworkCore\fruitShop.EntityFrameworkCore.csproj" />
   </ItemGroup>

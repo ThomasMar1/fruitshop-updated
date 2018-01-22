@@ -1,6 +1,8 @@
 ﻿using Abp.MultiTenancy;
 using fruitShop.Authorization.Users;
 
+/*Represents a tenant in the appliation*/
+
 namespace fruitShop.MultiTenancy
 {
     public class Tenant : AbpTenant<User>
@@ -15,3 +17,11 @@ namespace fruitShop.MultiTenancy
         }
     }
 }
+
+/*
+ *tenancyName: unique tenant in the application.
+ *name: readable name of the tenant. Long string.
+ */
+
+
+ 

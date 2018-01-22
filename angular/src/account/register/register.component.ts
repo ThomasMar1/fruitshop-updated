@@ -35,11 +35,17 @@ export class RegisterComponent extends AppComponentBase implements AfterViewInit
     }
 
     save(): void {
+        alert("1");
         this.saving = true;
         this._accountService.register(this.model)
-            .finally(() => { this.saving = false; })
+            .finally(() => { this.saving = true; })
+            
             .subscribe((result:RegisterOutput) => {
+
+
                 if (!result.canLogin) {
+
+                    abp.notify.info("Deleted");
                     this.notify.success(this.l('SuccessfullyRegistered'));
                     this._router.navigate(['/login']);
                     return;

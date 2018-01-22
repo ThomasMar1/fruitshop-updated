@@ -2,6 +2,8 @@
 using Abp.Authorization.Users;
 using Abp.Extensions;
 
+/*User of the application*/
+
 namespace fruitShop.Authorization.Users
 {
     public class User : AbpUser<User>

@@ -4,6 +4,8 @@ using Abp.MultiTenancy;
 using fruitShop.Authorization.Users;
 using fruitShop.Editions;
 
+/*Manage your tenants*/
+
 namespace fruitShop.MultiTenancy
 {
     public class TenantManager : AbpTenantManager<Tenant, User>
