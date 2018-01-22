@@ -12,7 +12,10 @@ namespace fruitShop.EntityFrameworkCore
         /* Define a DbSet for each entity of the application */
         public virtual DbSet<fruit> fruits { get; set; }
 
-    public fruitShopDbContext(DbContextOptions<fruitShopDbContext> options)
+        public virtual DbSet<supplier> suppliers { get; set; }
+
+
+        public fruitShopDbContext(DbContextOptions<fruitShopDbContext> options)
             : base(options)
         {
         }

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using fruitShop.Application.fruitApplication.dto;
+using fruitShop.Application.fruitApplication.dto; /*Change*/
 using Abp.Application.Services;
 using Abp.Domain.Repositories;
 using Abp.EntityFramework.Repositories;
 using Microsoft.EntityFrameworkCore;
 using fruitShop.Domain;
-
 
 namespace fruitShop.Application.fruitApplication
 {
