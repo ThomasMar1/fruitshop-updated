@@ -254,10 +254,6 @@ export class FruitApplicationServiceProxy {
         return Observable.of<Fruitdto>(<any>null);
     }
 
-    /**
-     * @sorting (optional) 
-     * @return Success
-     */
     getAll(sorting: string, skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfFruitdto> {
         let url_ = this.baseUrl + "/api/services/app/fruitApplication/GetAll?";
         if (sorting !== undefined)
@@ -279,6 +275,8 @@ export class FruitApplicationServiceProxy {
                 "Accept": "application/json"
             })
         };
+
+
 
         return this.http.request(url_, options_).flatMap((response_ : any) => {
             return this.processGetAll(response_);
@@ -315,7 +313,7 @@ export class FruitApplicationServiceProxy {
      * @input (optional) 
      * @return Success
      */
-    create(input: Fruitdto): Observable<Fruitdto> {
+    create(input: AddFruit): Observable<Fruitdto> {
         let url_ = this.baseUrl + "/api/services/app/fruitApplication/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -365,7 +363,7 @@ export class FruitApplicationServiceProxy {
      * @input (optional) 
      * @return Success
      */
-    update(input: Fruitdto): Observable<Fruitdto> {
+    update(input: UpdateFruit): Observable<Fruitdto> {
         let url_ = this.baseUrl + "/api/services/app/fruitApplication/Update";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -857,6 +855,266 @@ export class SessionServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Observable.of<GetCurrentLoginInformationsOutput>(<any>null);
+    }
+}
+
+@Injectable()
+export class SupplierServiceProxy {
+    private http: Http;
+    private baseUrl: string;
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    get(id: number): Observable<SupplierDto> {
+        let url_ = this.baseUrl + "/api/services/app/Supplier/Get?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processGet(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processGet(<any>response_);
+                } catch (e) {
+                    return <Observable<SupplierDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<SupplierDto>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processGet(response: Response): Observable<SupplierDto> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? SupplierDto.fromJS(resultData200) : new SupplierDto();
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<SupplierDto>(<any>null);
+    }
+
+
+    getAll(skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfSupplierDto> {
+        let url_ = this.baseUrl + "/api/services/app/Supplier/GetAll?";
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processGetAll(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfSupplierDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfSupplierDto>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processGetAll(response: Response): Observable<PagedResultDtoOfSupplierDto> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PagedResultDtoOfSupplierDto.fromJS(resultData200) : new PagedResultDtoOfSupplierDto();
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<PagedResultDtoOfSupplierDto>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    create(input: AddSupplier): Observable<SupplierDto> {
+        let url_ = this.baseUrl + "/api/services/app/Supplier/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processCreate(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processCreate(<any>response_);
+                } catch (e) {
+                    return <Observable<SupplierDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<SupplierDto>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processCreate(response: Response): Observable<SupplierDto> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? SupplierDto.fromJS(resultData200) : new SupplierDto();
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<SupplierDto>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    update(input: UpdateSupplier): Observable<SupplierDto> {
+        let url_ = this.baseUrl + "/api/services/app/Supplier/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            method: "put",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processUpdate(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processUpdate(<any>response_);
+                } catch (e) {
+                    return <Observable<SupplierDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<SupplierDto>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processUpdate(response: Response): Observable<SupplierDto> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? SupplierDto.fromJS(resultData200) : new SupplierDto();
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<SupplierDto>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    delete(id: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Supplier/Delete?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            method: "delete",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processDelete(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processDelete(response: Response): Observable<void> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            return Observable.of<void>(<any>null);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<void>(<any>null);
     }
 }
 
@@ -2072,6 +2330,118 @@ export interface IPagedResultDtoOfFruitdto {
     items: Fruitdto[];
 }
 
+export class AddFruit implements IAddFruit {
+    name: string;
+    colour: string;
+    stockAvailable: number;
+    pricePerItem: number;
+
+    constructor(data?: IAddFruit) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.colour = data["colour"];
+            this.stockAvailable = data["stockAvailable"];
+            this.pricePerItem = data["pricePerItem"];
+        }
+    }
+
+    static fromJS(data: any): AddFruit {
+        let result = new AddFruit();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["colour"] = this.colour;
+        data["stockAvailable"] = this.stockAvailable;
+        data["pricePerItem"] = this.pricePerItem;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new AddFruit();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAddFruit {
+    name: string;
+    colour: string;
+    stockAvailable: number;
+    pricePerItem: number;
+}
+
+export class UpdateFruit implements IUpdateFruit {
+    name: string;
+    colour: string;
+    stockAvailable: number;
+    pricePerItem: number;
+    id: number;
+
+    constructor(data?: IUpdateFruit) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.colour = data["colour"];
+            this.stockAvailable = data["stockAvailable"];
+            this.pricePerItem = data["pricePerItem"];
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): UpdateFruit {
+        let result = new UpdateFruit();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["colour"] = this.colour;
+        data["stockAvailable"] = this.stockAvailable;
+        data["pricePerItem"] = this.pricePerItem;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new UpdateFruit();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUpdateFruit {
+    name: string;
+    colour: string;
+    stockAvailable: number;
+    pricePerItem: number;
+    id: number;
+}
+
 export class CreateRoleDto implements ICreateRoleDto {
     name: string;
     displayName: string;
@@ -2591,6 +2961,246 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
 export interface ITenantLoginInfoDto {
     tenancyName: string;
     name: string;
+    id: number;
+}
+
+export class SupplierDto implements ISupplierDto {
+    name: string;
+    contact: string;
+    phone: string;
+    email: string;
+    lastModificationTime: moment.Moment;
+    lastModifierUserId: number;
+    creationTime: moment.Moment;
+    creatorUserId: number;
+    id: number;
+
+    constructor(data?: ISupplierDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.contact = data["contact"];
+            this.phone = data["phone"];
+            this.email = data["email"];
+            this.lastModificationTime = data["lastModificationTime"] ? moment(data["lastModificationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = data["lastModifierUserId"];
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
+            this.creatorUserId = data["creatorUserId"];
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): SupplierDto {
+        let result = new SupplierDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["contact"] = this.contact;
+        data["phone"] = this.phone;
+        data["email"] = this.email;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["creatorUserId"] = this.creatorUserId;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new SupplierDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ISupplierDto {
+    name: string;
+    contact: string;
+    phone: string;
+    email: string;
+    lastModificationTime: moment.Moment;
+    lastModifierUserId: number;
+    creationTime: moment.Moment;
+    creatorUserId: number;
+    id: number;
+}
+
+export class PagedResultDtoOfSupplierDto implements IPagedResultDtoOfSupplierDto {
+    totalCount: number;
+    items: SupplierDto[];
+
+    constructor(data?: IPagedResultDtoOfSupplierDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.totalCount = data["totalCount"];
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(SupplierDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfSupplierDto {
+        let result = new PagedResultDtoOfSupplierDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new PagedResultDtoOfSupplierDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPagedResultDtoOfSupplierDto {
+    totalCount: number;
+    items: SupplierDto[];
+}
+
+export class AddSupplier implements IAddSupplier {
+    name: string;
+    contact: string;
+    phone: string;
+    email: string;
+
+    constructor(data?: IAddSupplier) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.contact = data["contact"];
+            this.phone = data["phone"];
+            this.email = data["email"];
+        }
+    }
+
+    static fromJS(data: any): AddSupplier {
+        let result = new AddSupplier();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["contact"] = this.contact;
+        data["phone"] = this.phone;
+        data["email"] = this.email;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new AddSupplier();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAddSupplier {
+    name: string;
+    contact: string;
+    phone: string;
+    email: string;
+}
+
+export class UpdateSupplier implements IUpdateSupplier {
+    name: string;
+    contact: string;
+    phone: string;
+    email: string;
+    id: number;
+
+    constructor(data?: IUpdateSupplier) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.contact = data["contact"];
+            this.phone = data["phone"];
+            this.email = data["email"];
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): UpdateSupplier {
+        let result = new UpdateSupplier();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["contact"] = this.contact;
+        data["phone"] = this.phone;
+        data["email"] = this.email;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new UpdateSupplier();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUpdateSupplier {
+    name: string;
+    contact: string;
+    phone: string;
+    email: string;
     id: number;
 }
 

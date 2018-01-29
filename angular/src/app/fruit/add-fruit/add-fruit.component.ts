@@ -1,20 +1,57 @@
-import { Component, Injector, OnInit, AfterViewInit } from '@angular/core';
-import {FruitApplicationServiceProxy, Fruitdto} from '@shared/service-proxies/service-proxies';
-import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
-import { AppComponentBase } from 'shared/app-component-base';
-import { CurrencyPipe } from '@angular/common';
+import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap';
+import { FruitApplicationServiceProxy, AddFruit } from '@shared/service-proxies/service-proxies';
+import { AppComponentBase } from '@shared/app-component-base';
 
+
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-add-fruit',
   templateUrl: './add-fruit.component.html'
 })
-export class AddFruitComponent extends AppComponentBase implements OnInit {
 
-  constructor( injector: Injector, private _fruitService: FruitApplicationServiceProxy) { super(injector); }
+export class AddFruitComponent extends AppComponentBase {
 
+    @ViewChild('addFruitModal') modal: ModalDirective;
+    @ViewChild('modalContent') modalContent: ElementRef;
+    @ViewChild('fruitname') fruitNameInput: ElementRef;
 
-  ngOnInit() {
-  }
+    @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
 
+    active: boolean = false;
+    saving: boolean = false;
+    fruits: AddFruit = new AddFruit();
+
+    constructor(
+        injector: Injector,
+        private _fruitService: FruitApplicationServiceProxy
+    ) {
+        super(injector);
+    }
+
+    show(): void {
+        this.fruits = new AddFruit();
+        this.modal.show();
+    }
+
+    onShown(): void {
+        $.AdminBSB.input.activate($(this.modalContent.nativeElement));
+    }
+
+    save(): void {
+        this.saving = true;
+        this._fruitService.create(this.fruits)
+            .finally(() => { this.saving = false; })
+            .subscribe(() => {
+                this.notify.info("Successfully added fruit: " + this.fruits.name );
+                this.close();
+                this.modalSave.emit(null);
+            });
+    }
+
+    close(): void {
+        this.active = false;
+        this.modal.hide();
+    }
 }

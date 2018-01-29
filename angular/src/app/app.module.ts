@@ -37,6 +37,9 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
 import { FruitComponent } from './fruit/fruit.component';
 import { AddFruitComponent } from './fruit/add-fruit/add-fruit.component';
 import { EditFruitComponent } from './fruit/edit-fruit/edit-fruit.component';
+import { SupplierComponent } from './supplier/supplier.component';
+import { AddSupplierComponent } from './supplier/add-supplier/add-supplier.component';
+import { EditSupplierComponent } from './supplier/edit-supplier/edit-supplier.component';
 
 @NgModule({
     declarations: [
@@ -61,6 +64,9 @@ import { EditFruitComponent } from './fruit/edit-fruit/edit-fruit.component';
         FruitComponent,
         AddFruitComponent,
         EditFruitComponent,
+        SupplierComponent,
+        AddSupplierComponent,
+        EditSupplierComponent,
 
     
     ],

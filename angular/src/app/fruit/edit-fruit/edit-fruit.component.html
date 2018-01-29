@@ -1,3 +1,76 @@
-<p>
-  edit-fruit works!
-</p>
+<div bsModal #editFruitModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="editFruitModal"
+    aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog">
+
+        <div #modalContent class="modal-content">
+
+            <form>
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span>Edit fruit</span>
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input #fruitname autocomplete="off" id="fruitname" type="text" name="fruitName" [(ngModel)]="fruits.name" class="form-control">
+                                    <label for="fruitname" class="form-label">Fruit Name</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input #fruitname autocomplete="off" id="fruitcolour" type="text" name="fruitColour" [(ngModel)]="fruits.colour" class="form-control">
+                                    <label for="fruitcolour" class="form-label">Fruit Colour</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-3">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input autocomplete="off" id="fruitstock" type="text" name="fruitStock" [(ngModel)]="fruits.stockAvailable" class="form-control">
+                                    <label for="fruitstock" class="form-label">Stock Available</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input autocomplete="off" id="fruitprice" type="text" name="fruitPrce" [(ngModel)]="fruits.pricePerItem " class="form-control">
+                                    <label for="fruitprice" class="form-label">Price Per Item ($)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" (click)="close()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary waves-effect" (click)="save()">
+                        Update
+                    </button>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
