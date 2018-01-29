@@ -20,7 +20,7 @@
                         <div class="col-sm-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input #fruitname autocomplete="off" id="fruitname" type="text" name="fruitName" [(ngModel)]="fruits.name" class="form-control">
+                                    <input #fruitname autocomplete="off" id="fruitname" type="text" name="fruitName" [(ngModel)]="fruits.name" required class="form-control">
                                     <label for="fruitname" class="form-label">Fruit Name</label>
                                 </div>
                             </div>
@@ -30,7 +30,7 @@
                         <div class="col-sm-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input #fruitname autocomplete="off" id="fruitcolour" type="text" name="fruitColour" [(ngModel)]="fruits.colour" class="form-control">
+                                    <input #fruitname autocomplete="off" id="fruitcolour" type="text" name="fruitColour" [(ngModel)]="fruits.colour" required class="form-control">
                                     <label for="fruitcolour" class="form-label">Fruit Colour</label>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                         <div class="col-sm-3">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input autocomplete="off" id="fruitstock" type="text" name="fruitStock" [(ngModel)]="fruits.stockAvailable" class="form-control">
+                                    <input autocomplete="off" id="fruitstock" type="text" name="fruitStock" [(ngModel)]="fruits.stockAvailable" required class="form-control">
                                     <label for="fruitstock" class="form-label">Stock Available</label>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                         <div class="col-sm-3">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input autocomplete="off" id="fruitprice" type="text" name="fruitPrce" [(ngModel)]="fruits.pricePerItem " class="form-control">
+                                    <input autocomplete="off" id="fruitprice" type="text" name="fruitPrce" [(ngModel)]="fruits.pricePerItem " required class="form-control">
                                     <label for="fruitprice" class="form-label">Price Per Item ($)</label>
                                 </div>
                             </div>
