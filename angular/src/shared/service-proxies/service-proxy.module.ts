@@ -11,7 +11,9 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.TokenAuthServiceProxy,
         ApiServiceProxies.AccountServiceProxy,
         ApiServiceProxies.ConfigurationServiceProxy,
-        ApiServiceProxies.FruitApplicationServiceProxy
+        ApiServiceProxies.FruitApplicationServiceProxy,
+        ApiServiceProxies.SupplierServiceProxy
+        
     ]
 })
 export class ServiceProxyModule { }

@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Abp.AutoMapper;
+using fruitShop.Domain;
+using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
-using Abp.Domain.Entities.Auditing;
-using System.ComponentModel.DataAnnotations.Schema;
 
-
-
-namespace fruitShop.Domain
+namespace fruitShop.Application.Suppliers.Dto
 {
-    [Table("dSuppliers")]
-    public class supplier: AuditedEntity<Int32>  /*Inherits from timestamp class*/
+    [AutoMap(typeof(supplier))]
+    public class SupplierDto : AuditedEntityDto<Int32>
     {
         public string Name { get; set; }
         public string Contact { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-
     }
 }

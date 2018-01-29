@@ -6,14 +6,14 @@ using fruitShop.Domain;
 using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
 
-namespace fruitShop.Application.Supplier.Dto
+namespace fruitShop.Application.Suppliers.Dto
 {
     [AutoMapTo(typeof(supplier))]
     public class addSupplier
     {
-        public string supplierName { get; set; }
-        public string supplierContact { get; set; }
-        public string supplierPhoneNumber { get; set; }
-        public string supplierEmail { get; set; }
+        public string Name { get; set; }
+        public string Contact { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
     }
 }

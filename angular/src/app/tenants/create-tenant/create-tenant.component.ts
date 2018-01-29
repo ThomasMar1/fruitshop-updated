@@ -11,7 +11,7 @@ import * as _ from "lodash";
 })
 export class CreateTenantComponent extends AppComponentBase {
 
-    @ViewChild('createTenantModal') modal: ModalDirective;
+    @ViewChild('createFruitModal') modal: ModalDirective;
     @ViewChild('modalContent') modalContent: ElementRef;
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
@@ -43,7 +43,7 @@ export class CreateTenantComponent extends AppComponentBase {
         this._tenantService.create(this.tenant)
             .finally(() => { this.saving = false; })
             .subscribe(() => {
-                this.notify.info(this.l('SavedSuccessfully'));
+                this.notify.info("this.l('SavedSuccessfully')");
                 this.close();
                 this.modalSave.emit(null);
             });

@@ -15,9 +15,10 @@ using System;
 namespace fruitShop.Migrations
 {
     [DbContext(typeof(fruitShopDbContext))]
-    partial class fruitShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180122235305_names")]
+    partial class names
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -908,32 +909,6 @@ namespace fruitShop.Migrations
                     b.ToTable("dFruit");
                 });
 
-            modelBuilder.Entity("fruitShop.Domain.staff", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Age");
-
-                    b.Property<DateTime>("CreationTime");
-
-                    b.Property<long?>("CreatorUserId");
-
-                    b.Property<string>("Email");
-
-                    b.Property<DateTime?>("LastModificationTime");
-
-                    b.Property<long?>("LastModifierUserId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Phone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("dStaff");
-                });
-
             modelBuilder.Entity("fruitShop.Domain.supplier", b =>
                 {
                     b.Property<int>("Id")
@@ -953,7 +928,7 @@ namespace fruitShop.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Phone");
+                    b.Property<string>("PhoneNumber");
 
                     b.HasKey("Id");
 
