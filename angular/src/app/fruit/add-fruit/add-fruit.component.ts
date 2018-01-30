@@ -3,7 +3,6 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { FruitApplicationServiceProxy, AddFruit } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
-
 import * as _ from "lodash";
 
 @Component({
@@ -34,7 +33,7 @@ export class AddFruitComponent extends AppComponentBase {
         this.fruits = new AddFruit();
         this.modal.show();
     }
-
+    
     onShown(): void {
         $.AdminBSB.input.activate($(this.modalContent.nativeElement));
     }

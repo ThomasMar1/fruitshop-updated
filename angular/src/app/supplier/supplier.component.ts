@@ -1,8 +1,7 @@
-import { Component, Injector, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { SupplierServiceProxy, SupplierDto } from '@shared/service-proxies/service-proxies';
-import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
-import { AppComponentBase } from 'shared/app-component-base';
+import { Component, Injector, ViewChild } from '@angular/core';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
+import { SupplierServiceProxy, SupplierDto, PagedResultDtoOfSupplierDto, UpdateSupplier, } from '@shared/service-proxies/service-proxies';
+import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
 import { AddSupplierComponent } from "app/supplier/add-supplier/add-supplier.component";
 import { EditSupplierComponent } from "app/supplier/edit-supplier/edit-supplier.component";
 
@@ -15,42 +14,51 @@ import { EditSupplierComponent } from "app/supplier/edit-supplier/edit-supplier.
   animations: [appModuleAnimation()]
 
 })
-export class SupplierComponent extends AppComponentBase implements OnInit {
+export class SupplierComponent extends PagedListingComponentBase<SupplierDto> {
+
   @ViewChild('addSupplierModal') addSupplierModal: AddSupplierComponent;
   @ViewChild('editSupplierModal') editSupplierModal: EditSupplierComponent;
 
-  supplier: SupplierDto[] = [];
+  suppliers: SupplierDto[] = [];
 
-  constructor(injector: Injector, private _supplierService: SupplierServiceProxy) { super(injector); }
-
-  ngOnInit() {
+  constructor(
+    injector: Injector,
+    private _supplierService: SupplierServiceProxy
+  ) {
+    super(injector);
   }
 
-  ngAfterViewInit() {
-    this.getSuppliers();
+  list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
+    this._supplierService.getAll('',request.skipCount, request.maxResultCount)
+      .finally(() => {
+        finishedCallback();
+      })
+      .subscribe((result: PagedResultDtoOfSupplierDto) => {
+        this.suppliers = result.items;
+        this.showPaging(result, pageNumber);
+      });
   }
-
 
   getSuppliers() {
-    this._supplierService.getAll(0, 500)
+    this._supplierService.getAll('',0, 500)
 
       .finally(() => {
 
       })
       .subscribe((result) => {
-        this.supplier = result.items;
+        this.suppliers = result.items;
       });
 
   }
 
-  delete(supplier: SupplierDto): void {
+  delete(suppliers: SupplierDto): void {
     abp.message.confirm(
-      "Delete '" + supplier.name + "'?",
+      "Delete '" + suppliers.name + "'?",
       (result: boolean) => {
         if (result) {
-          this._supplierService.delete(supplier.id)
+          this._supplierService.delete(suppliers.id)
             .subscribe(() => {
-              abp.notify.info("Deleted " + supplier.name);
+              abp.notify.info("Deleted " + suppliers.name);
               this.getSuppliers();
             });
         }
@@ -59,8 +67,12 @@ export class SupplierComponent extends AppComponentBase implements OnInit {
 
 
   }
-
   addSupplier(): void {
     this.addSupplierModal.show();
 }
+
+  editSupplier(suppliers: UpdateSupplier): void {
+    this.editSupplierModal.show(suppliers.id);
+}
+
 }

@@ -1,3 +1,73 @@
-<p>
-  edit-supplier works!
-</p>
+<div bsModal #editSupplierModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="editSupplierModal"
+    aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog">
+
+        <div #modalContent class="modal-content">
+
+            <form #editSupplierForm="ngForm">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span>Edit exsting supplier</span>
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input #supplierName autocomplete="off" id="supplierName" type="text" name="supplierName" [(ngModel)]="suppliers.name" required class="form-control">
+                                    <label for="supplierName" class="form-label">Supplier Name</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input #supplierContact autocomplete="off" id="supplierContact" type="text" name="supplierContact" [(ngModel)]="suppliers.contact" required class="form-control">
+                                    <label for="supplierContact" class="form-label">Supplier Contact Person</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input #supplierPhone autocomplete="off" id="supplierPhone" type="text" name="supplierPhone" [(ngModel)]="suppliers.phone" required class="form-control">
+                                    <label for="supplierPhone" class="form-label">Supplier Phone Number</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input #supplierEmail autocomplete="off" id="supplierEmail" type="text" name="supplierEmail" [(ngModel)]="suppliers.email" required class="form-control">
+                                    <label for="supplierEmail" class="form-label">Supplier Email</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" (click)="close()">
+                        Cancel
+                    </button>
+                    <button [disabled]="!editSupplierForm.form.valid" class="btn btn-primary waves-effect" (click)="save()">
+                        Update
+                    </button>
+                </div>
+
+            </form>
+
+
+
+
+        </div>
+    </div>
+</div>

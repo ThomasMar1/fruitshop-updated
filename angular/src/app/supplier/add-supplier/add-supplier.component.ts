@@ -7,19 +7,20 @@ import * as _ from "lodash";
 
 @Component({
   selector: 'app-add-supplier',
-  templateUrl: './add-supplier.component.html',
-  styleUrls: ['./add-supplier.component.css']
+  templateUrl: './add-supplier.component.html'
 })
+
 export class AddSupplierComponent extends AppComponentBase {
 
     @ViewChild('addSupplierModal') modal: ModalDirective;
-    @ViewChild('editSupplierModal') modalContent: ElementRef;
+    @ViewChild('modalContent') modalContent: ElementRef;
+    /*@ViewChild('fruitname') fruitNameInput: ElementRef;*/
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
 
     active: boolean = false;
     saving: boolean = false;
-    supplier: AddSupplier = null;
+    suppliers: AddSupplier = new AddSupplier();
 
     constructor(
         injector: Injector,
@@ -27,11 +28,29 @@ export class AddSupplierComponent extends AppComponentBase {
     ) {
         super(injector);
     }
-    show(): void {
-      this.modal.show();
-      this.supplier = new AddSupplier();
-  }
-  ngOnInit() {
-  }
 
+    show(): void {
+        this.suppliers = new AddSupplier();
+        this.modal.show();
+    }
+
+    onShown(): void {
+        $.AdminBSB.input.activate($(this.modalContent.nativeElement));
+    }
+
+    save(): void {
+        this.saving = true;
+        this._supplierService.create(this.suppliers)
+            .finally(() => { this.saving = false; })
+            .subscribe(() => {
+                this.notify.info("Successfully added fruit: " + this.suppliers.name );
+                this.close();
+                this.modalSave.emit(null);
+            });
+    }
+
+    close(): void {
+        this.active = false;
+        this.modal.hide();
+    }
 }

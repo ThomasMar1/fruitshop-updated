@@ -45,8 +45,6 @@ export class EditFruitComponent extends AppComponentBase {
   }
 
   onShown(): void {
-    //this.fruitNameInput.nativeElement.focus();
-    //this.fruitNameInput.nativeElement.select();
     $.AdminBSB.input.activate($(this.modalContent.nativeElement));
 
 

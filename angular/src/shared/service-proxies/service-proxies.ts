@@ -920,7 +920,7 @@ export class SupplierServiceProxy {
     }
 
 
-    getAll(skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfSupplierDto> {
+    getAll(sorting: string, skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfSupplierDto> {
         let url_ = this.baseUrl + "/api/services/app/Supplier/GetAll?";
         if (skipCount === undefined || skipCount === null)
             throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
