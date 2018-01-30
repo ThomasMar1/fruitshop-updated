@@ -14,7 +14,6 @@ export class AddSupplierComponent extends AppComponentBase {
 
     @ViewChild('addSupplierModal') modal: ModalDirective;
     @ViewChild('modalContent') modalContent: ElementRef;
-    /*@ViewChild('fruitname') fruitNameInput: ElementRef;*/
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
 
