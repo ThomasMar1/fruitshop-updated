@@ -57,7 +57,7 @@ export class EditSupplierComponent extends AppComponentBase {
     this._supplierService.update(this.suppliers)
       .finally(() => { this.saving = false; })
       .subscribe(() => {
-        this.notify.info("Successfully updated: " + this.suppliers.name);
+        this.notify.success("Successfully updated: " + this.suppliers.name);
         this.close();
         this.modalSave.emit(null);
       });

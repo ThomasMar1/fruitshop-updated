@@ -1,7 +1,9 @@
-import { Component, ViewChild, Injector, Output, Input, EventEmitter, ElementRef } from '@angular/core';
+import { Component, ViewChild, Injector, Output, Input, EventEmitter, ElementRef, Pipe, PipeTransform, NgModule } from '@angular/core';
 import { AppComponentBase } from 'shared/app-component-base';
 import { ModalDirective } from 'ngx-bootstrap';
 import { FruitApplicationServiceProxy, UpdateFruit, Fruitdto } from '@shared/service-proxies/service-proxies';
+import { CurrencyPipe } from "@angular/common"
+
 
 import * as _ from "lodash";
 
@@ -56,7 +58,7 @@ export class EditFruitComponent extends AppComponentBase {
     this._fruitService.update(this.fruits)
       .finally(() => { this.saving = false; })
       .subscribe(() => {
-        this.notify.info("Successfully updated fruit: " + this.fruits.name);
+        this.notify.success("Successfully updated " + this.fruits.name);
         this.close();
         this.modalSave.emit(null);
       });

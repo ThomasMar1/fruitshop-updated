@@ -23,11 +23,15 @@
                         </ul>
                     </li>
                 </ul>
+                <br>
+
             </div>
             <div class="body table-responsive">
+                
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
+                            <th>Ref ID</th>
                             <th>Supplier Name</th>
                             <th>Contact Person</th>
                             <th>Phone</th>
@@ -38,10 +42,11 @@
                     </thead>
 
                     <tr *ngFor="let x of suppliers">
+                        <td>{{x.id}}</td>
                         <td>{{x.name}}</td>
                         <td>{{x.contact}}</td>
                         <td>{{x.phone}}</td>
-                        <td>{{x.email}}</td>
+                        <td><a href="mailto:{{x.email}}" target="_top">{{x.email}}</a></td>
                         <td class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">menu</i>
@@ -64,6 +69,8 @@
                     (click)="addSupplier()">
                     <i class="material-icons">add</i>
                 </button>
+
+
 
             </div>
 

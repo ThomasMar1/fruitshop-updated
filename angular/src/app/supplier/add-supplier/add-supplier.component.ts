@@ -42,7 +42,7 @@ export class AddSupplierComponent extends AppComponentBase {
         this._supplierService.create(this.suppliers)
             .finally(() => { this.saving = false; })
             .subscribe(() => {
-                this.notify.info("Successfully added fruit: " + this.suppliers.name );
+                this.notify.success("Successfully added " + this.suppliers.name );
                 this.close();
                 this.modalSave.emit(null);
             });

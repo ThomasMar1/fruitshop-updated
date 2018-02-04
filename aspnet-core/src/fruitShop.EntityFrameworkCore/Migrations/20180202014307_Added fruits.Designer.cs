@@ -15,9 +15,10 @@ using System;
 namespace fruitShop.Migrations
 {
     [DbContext(typeof(fruitShopDbContext))]
-    partial class fruitShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180202014307_Added fruits")]
+    partial class Addedfruits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -903,13 +904,7 @@ namespace fruitShop.Migrations
 
                     b.Property<int>("stockAvailable");
 
-                    b.Property<int?>("supplierId");
-
-                    b.Property<int>("supplierRefId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("supplierId");
 
                     b.ToTable("dFruit");
                 });
@@ -961,11 +956,7 @@ namespace fruitShop.Migrations
 
                     b.Property<string>("Phone");
 
-                    b.Property<int?>("supplierId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("supplierId");
 
                     b.ToTable("dSuppliers");
                 });
@@ -1152,20 +1143,6 @@ namespace fruitShop.Migrations
                     b.HasOne("fruitShop.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
                         .HasForeignKey("LastModifierUserId");
-                });
-
-            modelBuilder.Entity("fruitShop.Domain.fruit", b =>
-                {
-                    b.HasOne("fruitShop.Domain.supplier", "supplier")
-                        .WithMany()
-                        .HasForeignKey("supplierId");
-                });
-
-            modelBuilder.Entity("fruitShop.Domain.supplier", b =>
-                {
-                    b.HasOne("fruitShop.Domain.supplier")
-                        .WithMany("Suppliers")
-                        .HasForeignKey("supplierId");
                 });
 
             modelBuilder.Entity("fruitShop.MultiTenancy.Tenant", b =>

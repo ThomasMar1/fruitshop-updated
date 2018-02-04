@@ -1,0 +1,13 @@
+<div class="row clearfix">
+  <div class="col-sm-12 m-t-10">
+      <div class="form-group form-float border">
+          <label for="*" class="form-label">Supplier</label>
+
+          <select  class="form-control" id="sel1">
+              <option  selected >No supplier</option>
+              <option *ngFor="let x of suppliers">{{ x.name }}</option>
+
+          </select>
+      </div>
+  </div>
+</div>

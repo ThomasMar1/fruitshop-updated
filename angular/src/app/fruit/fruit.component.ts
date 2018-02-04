@@ -41,14 +41,21 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
 
     getFruits() {
         this._fruitService.getAll('', 0, 500)
-
             .finally(() => {
-
             })
             .subscribe((result) => {
                 this.fruits = result.items;
             });
 
+    }
+
+    warning(stock){
+        if (stock == 0){
+            abp.message.error("This item is out of stock or not available. Please contact supplier to restock supplies.", "Out of stock");
+        }
+        else {
+            abp.message.warn("This item is low in stock. Please contact supplier to restock supplies.", "Low stock");
+        }
     }
 
     delete(fruits: Fruitdto): void {
@@ -58,14 +65,12 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
                 if (result) {
                     this._fruitService.delete(fruits.id)
                         .subscribe(() => {
-                            abp.notify.info("Deleted " + fruits.name);
+                            abp.notify.success("Deleted " + fruits.name);
                             this.getFruits();
                         });
                 }
             }
         );
-
-
     }
 
     // Show modals

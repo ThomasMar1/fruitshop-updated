@@ -9,6 +9,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Migrations\20180111010329_initial.cs" />
+    <Compile Remove="Migrations\20180202004923_Readded ICollection.cs" />
+    <Compile Remove="Migrations\20180202005434_Restored orginal.cs" />
+    <Compile Remove="Migrations\20180202005653_Restored orginal 2.cs" />
+    <Compile Remove="Migrations\20180202010235_Restored orginal 3.cs" />
+    <Compile Remove="Migrations\20180202010805_Something.cs" />
+    <Compile Remove="Migrations\20180202013130_Check migrations.cs" />
+    <Compile Remove="Migrations\20180202013709_New.cs" />
+    <Compile Remove="Migrations\20180204004423_Foreign Keys.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />

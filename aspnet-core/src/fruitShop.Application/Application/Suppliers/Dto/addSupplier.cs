@@ -15,5 +15,6 @@ namespace fruitShop.Application.Suppliers.Dto
         public string Contact { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+
     }
 }

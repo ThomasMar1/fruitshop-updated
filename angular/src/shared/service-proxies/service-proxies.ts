@@ -919,7 +919,6 @@ export class SupplierServiceProxy {
         return Observable.of<SupplierDto>(<any>null);
     }
 
-
     getAll(sorting: string, skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfSupplierDto> {
         let url_ = this.baseUrl + "/api/services/app/Supplier/GetAll?";
         if (skipCount === undefined || skipCount === null)
@@ -2207,6 +2206,7 @@ export class Fruitdto implements IFruitdto {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
+    supplierRefId: number;
     lastModificationTime: moment.Moment;
     lastModifierUserId: number;
     creationTime: moment.Moment;
@@ -2228,6 +2228,7 @@ export class Fruitdto implements IFruitdto {
             this.colour = data["colour"];
             this.stockAvailable = data["stockAvailable"];
             this.pricePerItem = data["pricePerItem"];
+            this.supplierRefId = data["supplierRefId"];
             this.lastModificationTime = data["lastModificationTime"] ? moment(data["lastModificationTime"].toString()) : <any>undefined;
             this.lastModifierUserId = data["lastModifierUserId"];
             this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
@@ -2248,6 +2249,7 @@ export class Fruitdto implements IFruitdto {
         data["colour"] = this.colour;
         data["stockAvailable"] = this.stockAvailable;
         data["pricePerItem"] = this.pricePerItem;
+        data["supplierRefId"] = this.supplierRefId;
         data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         data["lastModifierUserId"] = this.lastModifierUserId;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -2269,6 +2271,7 @@ export interface IFruitdto {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
+    supplierRefId: number;
     lastModificationTime: moment.Moment;
     lastModifierUserId: number;
     creationTime: moment.Moment;
@@ -2335,6 +2338,7 @@ export class AddFruit implements IAddFruit {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
+    supplierRefId: number;
 
     constructor(data?: IAddFruit) {
         if (data) {
@@ -2351,6 +2355,7 @@ export class AddFruit implements IAddFruit {
             this.colour = data["colour"];
             this.stockAvailable = data["stockAvailable"];
             this.pricePerItem = data["pricePerItem"];
+            this.supplierRefId = data["supplierRefId"];
         }
     }
 
@@ -2366,6 +2371,7 @@ export class AddFruit implements IAddFruit {
         data["colour"] = this.colour;
         data["stockAvailable"] = this.stockAvailable;
         data["pricePerItem"] = this.pricePerItem;
+        data["supplierRefId"] = this.supplierRefId;
         return data; 
     }
 
@@ -2382,6 +2388,7 @@ export interface IAddFruit {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
+    supplierRefId: number;
 }
 
 export class UpdateFruit implements IUpdateFruit {
@@ -2389,6 +2396,7 @@ export class UpdateFruit implements IUpdateFruit {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
+    supplierRefId: number;
     id: number;
 
     constructor(data?: IUpdateFruit) {
@@ -2406,6 +2414,7 @@ export class UpdateFruit implements IUpdateFruit {
             this.colour = data["colour"];
             this.stockAvailable = data["stockAvailable"];
             this.pricePerItem = data["pricePerItem"];
+            this.supplierRefId = data["supplierRefId"];
             this.id = data["id"];
         }
     }
@@ -2422,6 +2431,7 @@ export class UpdateFruit implements IUpdateFruit {
         data["colour"] = this.colour;
         data["stockAvailable"] = this.stockAvailable;
         data["pricePerItem"] = this.pricePerItem;
+        data["supplierRefId"] = this.supplierRefId;
         data["id"] = this.id;
         return data; 
     }
@@ -2439,6 +2449,7 @@ export interface IUpdateFruit {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
+    supplierRefId: number;
     id: number;
 }
 

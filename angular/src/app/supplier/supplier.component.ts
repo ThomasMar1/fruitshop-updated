@@ -58,7 +58,7 @@ export class SupplierComponent extends PagedListingComponentBase<SupplierDto> {
         if (result) {
           this._supplierService.delete(suppliers.id)
             .subscribe(() => {
-              abp.notify.info("Deleted " + suppliers.name);
+              abp.notify.success("Deleted " + suppliers.name);
               this.getSuppliers();
             });
         }

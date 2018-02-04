@@ -15,8 +15,8 @@ using System;
 namespace fruitShop.Migrations
 {
     [DbContext(typeof(fruitShopDbContext))]
-    [Migration("20180129215809_Foreign1")]
-    partial class Foreign1
+    [Migration("20180202013836_Check migrations")]
+    partial class Checkmigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -904,13 +904,7 @@ namespace fruitShop.Migrations
 
                     b.Property<int>("stockAvailable");
 
-                    b.Property<int?>("supplierId");
-
-                    b.Property<int>("supplierRefId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("supplierId");
 
                     b.ToTable("dFruit");
                 });
@@ -1149,13 +1143,6 @@ namespace fruitShop.Migrations
                     b.HasOne("fruitShop.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
                         .HasForeignKey("LastModifierUserId");
-                });
-
-            modelBuilder.Entity("fruitShop.Domain.fruit", b =>
-                {
-                    b.HasOne("fruitShop.Domain.supplier")
-                        .WithMany("Fruits")
-                        .HasForeignKey("supplierId");
                 });
 
             modelBuilder.Entity("fruitShop.MultiTenancy.Tenant", b =>

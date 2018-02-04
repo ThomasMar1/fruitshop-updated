@@ -1,7 +1,8 @@
-import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { FruitApplicationServiceProxy, AddFruit } from '@shared/service-proxies/service-proxies';
+import { FruitApplicationServiceProxy, AddFruit, SupplierDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
+import { SelectSupplierComponent} from "app/fruit/select-supplier/select-supplier.component"
 
 import * as _ from "lodash";
 
@@ -18,6 +19,8 @@ export class AddFruitComponent extends AppComponentBase {
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
 
+    //suppliers: SupplierDto[] = [];
+    
     active: boolean = false;
     saving: boolean = false;
     fruits: AddFruit = new AddFruit();
@@ -28,6 +31,8 @@ export class AddFruitComponent extends AppComponentBase {
     ) {
         super(injector);
     }
+
+
 
     show(): void {
         this.fruits = new AddFruit();
@@ -43,7 +48,7 @@ export class AddFruitComponent extends AppComponentBase {
         this._fruitService.create(this.fruits)
             .finally(() => { this.saving = false; })
             .subscribe(() => {
-                this.notify.info("Successfully added fruit: " + this.fruits.name );
+                this.notify.success("Successfully added fruit: " + this.fruits.name );
                 this.close();
                 this.modalSave.emit(null);
             });

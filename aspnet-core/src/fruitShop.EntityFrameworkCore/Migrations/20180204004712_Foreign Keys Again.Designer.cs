@@ -15,8 +15,8 @@ using System;
 namespace fruitShop.Migrations
 {
     [DbContext(typeof(fruitShopDbContext))]
-    [Migration("20180129221004_removeForeign")]
-    partial class removeForeign
+    [Migration("20180204004712_Foreign Keys Again")]
+    partial class ForeignKeysAgain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -904,7 +904,13 @@ namespace fruitShop.Migrations
 
                     b.Property<int>("stockAvailable");
 
+                    b.Property<int?>("supplierId");
+
+                    b.Property<int>("supplierRefId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("supplierId");
 
                     b.ToTable("dFruit");
                 });
@@ -956,7 +962,11 @@ namespace fruitShop.Migrations
 
                     b.Property<string>("Phone");
 
+                    b.Property<int?>("supplierId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("supplierId");
 
                     b.ToTable("dSuppliers");
                 });
@@ -1143,6 +1153,20 @@ namespace fruitShop.Migrations
                     b.HasOne("fruitShop.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
                         .HasForeignKey("LastModifierUserId");
+                });
+
+            modelBuilder.Entity("fruitShop.Domain.fruit", b =>
+                {
+                    b.HasOne("fruitShop.Domain.supplier", "supplier")
+                        .WithMany()
+                        .HasForeignKey("supplierId");
+                });
+
+            modelBuilder.Entity("fruitShop.Domain.supplier", b =>
+                {
+                    b.HasOne("fruitShop.Domain.supplier")
+                        .WithMany("Suppliers")
+                        .HasForeignKey("supplierId");
                 });
 
             modelBuilder.Entity("fruitShop.MultiTenancy.Tenant", b =>
