@@ -16,8 +16,8 @@ namespace fruitShop.Domain
         public string Contact { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public fruit
 
-        public List<supplier> Suppliers { get; set; }   
 
 
 
