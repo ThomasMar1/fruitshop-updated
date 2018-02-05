@@ -15,7 +15,9 @@ namespace fruitShop.Application.fruitApplication.dto
         public string colour { get; set; }
         public int stockAvailable { get; set; }
         public decimal pricePerItem { get; set; }
+        public int supplierId { get; set; }
         public int supplierRefId { get; set; }
+
 
 
 

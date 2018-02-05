@@ -41,10 +41,10 @@
                         <td>{{fruit.colour}}</td>
                         <td>{{fruit.stockAvailable}}</td>
                         <td>${{ fruit.pricePerItem | number : '1.2-2'}}</td>
-                        <td>{{fruit.supplierRefId}}</td>
-                        <td *ngIf="fruit.stockAvailable > 10">
-            
-                        </td>
+                        <td>
+                            <p *ngIf="!fruit.supplierRefId == 0">{{fruit.supplierRefId}}</p>
+                            <p *ngIf="fruit.supplierRefId == 0">-</p></td>
+                        <td *ngIf="fruit.stockAvailable > 10"></td>
                         <td *ngIf="10 >= fruit.stockAvailable">
                             <i class="material-icons col-red" data-toggle="modal tool-tip" title="Low stock" (click)="warning(fruit.stockAvailable)" style="cursor: pointer;">warning</i>
                         </td>

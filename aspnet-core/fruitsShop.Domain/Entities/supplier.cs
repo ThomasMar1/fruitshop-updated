@@ -17,7 +17,7 @@ namespace fruitShop.Domain
         public string Phone { get; set; }
         public string Email { get; set; }
 
-        public List<supplier> Suppliers { get; set; }   /*add migration*/
+        public List<supplier> Suppliers { get; set; }   
 
 
 

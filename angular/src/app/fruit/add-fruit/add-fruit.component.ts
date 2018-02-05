@@ -18,8 +18,6 @@ export class AddFruitComponent extends AppComponentBase {
     @ViewChild('fruitname') fruitNameInput: ElementRef;
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
-
-    //suppliers: SupplierDto[] = [];
     
     active: boolean = false;
     saving: boolean = false;
@@ -31,8 +29,6 @@ export class AddFruitComponent extends AppComponentBase {
     ) {
         super(injector);
     }
-
-
 
     show(): void {
         this.fruits = new AddFruit();

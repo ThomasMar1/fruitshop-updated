@@ -18,7 +18,7 @@ namespace fruitShop.Domain
         public decimal pricePerItem { get; set; }
 
         public int supplierRefId { get; set; }
-        public supplier supplier { get; set; } /*add migration*/
+        public supplier supplier { get; set; } 
 
 
 

@@ -35,12 +35,12 @@ export class RegisterComponent extends AppComponentBase implements AfterViewInit
     }
 
     save(): void {
-        alert("1");
         this.saving = true;
         this._accountService.register(this.model)
             .finally(() => { this.saving = true; })
             
             .subscribe((result:RegisterOutput) => {
+                this.notify.success(this.l('SuccessfullyRegistered'));
 
 
                 if (!result.canLogin) {
