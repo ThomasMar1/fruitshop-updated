@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 namespace fruitShop.Application.Suppliers.Dto
 {
     [AutoMapTo(typeof(supplier))]
-    public class addSupplier
+    public class addSupplierDto
     {
         public string Name { get; set; }
         public string Contact { get; set; }

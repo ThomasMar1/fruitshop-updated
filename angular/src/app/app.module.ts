@@ -40,7 +40,8 @@ import { EditFruitComponent } from './fruit/edit-fruit/edit-fruit.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { AddSupplierComponent } from './supplier/add-supplier/add-supplier.component';
 import { EditSupplierComponent } from './supplier/edit-supplier/edit-supplier.component';
-import { SelectSupplierComponent } from './fruit/select-supplier/select-supplier.component';
+import { SelectSupplierComponent } from './fruit/select-supplier/select-supplier.componen;
+import { ViewSupplierComponent } from './supplier/view-supplier/view-supplier.component't';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import { SelectSupplierComponent } from './fruit/select-supplier/select-supplier
         SupplierComponent,
         AddSupplierComponent,
         EditSupplierComponent,
-        SelectSupplierComponent,
+        SelectSupplierCompone,
+        ViewSupplierComponentnt,
 
     
     ],

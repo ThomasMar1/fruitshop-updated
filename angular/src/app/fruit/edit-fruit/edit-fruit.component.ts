@@ -43,7 +43,6 @@ export class EditFruitComponent extends AppComponentBase {
         this.fruits.colour = result.colour;
         this.fruits.stockAvailable = result.stockAvailable;
         this.fruits.pricePerItem = result.pricePerItem;
-        this.fruits.supplierRefId = result.supplierRefId;
       });
   }
 

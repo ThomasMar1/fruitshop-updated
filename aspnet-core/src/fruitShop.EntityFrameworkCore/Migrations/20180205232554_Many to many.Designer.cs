@@ -15,9 +15,10 @@ using System;
 namespace fruitShop.Migrations
 {
     [DbContext(typeof(fruitShopDbContext))]
-    partial class fruitShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180205232554_Many to many")]
+    partial class Manytomany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -896,8 +897,6 @@ namespace fruitShop.Migrations
 
                     b.Property<long?>("LastModifierUserId");
 
-                    b.Property<decimal>("Price");
-
                     b.HasKey("supplierId", "fruitId");
 
                     b.HasIndex("fruitId");
@@ -1078,7 +1077,7 @@ namespace fruitShop.Migrations
 
             modelBuilder.Entity("fruitShop.Domain.SupplierFruit", b =>
                 {
-                    b.HasOne("fruitShop.Domain.fruit")
+                    b.HasOne("fruitShop.Domain.fruit", "fruit")
                         .WithMany("SupplierFruits")
                         .HasForeignKey("fruitId")
                         .OnDelete(DeleteBehavior.Cascade);

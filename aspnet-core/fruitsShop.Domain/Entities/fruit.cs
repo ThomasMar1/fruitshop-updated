@@ -17,7 +17,7 @@ namespace fruitShop.Domain
         public int stockAvailable { get; set; }
         public decimal pricePerItem { get; set; }
 
-
+        public ICollection<SupplierFruit> SupplierFruits { get; set; }
 
 
 

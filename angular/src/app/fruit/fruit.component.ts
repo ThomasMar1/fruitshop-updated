@@ -28,7 +28,7 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
         super(injector);
     }
 
-    list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
+    protected list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
         this._fruitService.getAll('', request.skipCount, request.maxResultCount)
             .finally(() => {
                 finishedCallback();
@@ -38,7 +38,7 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
                 this.showPaging(result, pageNumber);
             });
     }
-
+    /*
     getFruits() {
         this._fruitService.getAll('', 0, 500)
             .finally(() => {
@@ -47,7 +47,7 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
                 this.fruits = result.items;
             });
 
-    }
+    }*/
 
     warning(stock){
         if (stock == 0){
@@ -58,7 +58,7 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
         }
     }
 
-    delete(fruits: Fruitdto): void {
+    protected delete(fruits: Fruitdto): void {
         abp.message.confirm(
             "Delete '" + fruits.name + "'?",
             (result: boolean) => {
@@ -66,7 +66,7 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
                     this._fruitService.delete(fruits.id)
                         .subscribe(() => {
                             abp.notify.success("Deleted " + fruits.name);
-                            this.getFruits();
+                            this.refresh();
                         });
                 }
             }

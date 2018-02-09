@@ -254,6 +254,14 @@ export class FruitApplicationServiceProxy {
         return Observable.of<Fruitdto>(<any>null);
     }
 
+    /**
+     * @name (optional) 
+     * @colour (optional) 
+     * @lastModificationTime (optional) 
+     * @lastModifierUserId (optional) 
+     * @creatorUserId (optional) 
+     * @return Success
+     */
     getAll(sorting: string, skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfFruitdto> {
         let url_ = this.baseUrl + "/api/services/app/fruitApplication/GetAll?";
         if (sorting !== undefined)
@@ -870,6 +878,160 @@ export class SupplierServiceProxy {
     }
 
     /**
+     * @request (optional) 
+     * @return Success
+     */
+    addFruit(request: AddFruitDto): Observable<boolean> {
+        let url_ = this.baseUrl + "/api/services/app/Supplier/addFruit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processAddFruit(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processAddFruit(<any>response_);
+                } catch (e) {
+                    return <Observable<boolean>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<boolean>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processAddFruit(response: Response): Observable<boolean> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<boolean>(<any>null);
+    }
+
+    /**
+     * @request (optional) 
+     * @return Success
+     */
+    updateFruit(request: UpdateFruitDto): Observable<boolean> {
+        let url_ = this.baseUrl + "/api/services/app/Supplier/updateFruit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            method: "put",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processUpdateFruit(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processUpdateFruit(<any>response_);
+                } catch (e) {
+                    return <Observable<boolean>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<boolean>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processUpdateFruit(response: Response): Observable<boolean> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<boolean>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    deleteFruit(supplierId: number, fruitId: number): Observable<boolean> {
+        let url_ = this.baseUrl + "/api/services/app/Supplier/deleteFruit?";
+        if (supplierId === undefined || supplierId === null)
+            throw new Error("The parameter 'supplierId' must be defined and cannot be null.");
+        else
+            url_ += "supplierId=" + encodeURIComponent("" + supplierId) + "&"; 
+        if (fruitId === undefined || fruitId === null)
+            throw new Error("The parameter 'fruitId' must be defined and cannot be null.");
+        else
+            url_ += "fruitId=" + encodeURIComponent("" + fruitId) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            method: "delete",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processDeleteFruit(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processDeleteFruit(<any>response_);
+                } catch (e) {
+                    return <Observable<boolean>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<boolean>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processDeleteFruit(response: Response): Observable<boolean> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<boolean>(<any>null);
+    }
+
+    /**
      * @return Success
      */
     get(id: number): Observable<SupplierDto> {
@@ -919,6 +1081,16 @@ export class SupplierServiceProxy {
         return Observable.of<SupplierDto>(<any>null);
     }
 
+    /**
+     * @name (optional) 
+     * @contact (optional) 
+     * @phone (optional) 
+     * @email (optional) 
+     * @lastModificationTime (optional) 
+     * @lastModifierUserId (optional) 
+     * @creatorUserId (optional) 
+     * @return Success
+     */
     getAll(sorting: string, skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfSupplierDto> {
         let url_ = this.baseUrl + "/api/services/app/Supplier/GetAll?";
         if (skipCount === undefined || skipCount === null)
@@ -974,7 +1146,7 @@ export class SupplierServiceProxy {
      * @input (optional) 
      * @return Success
      */
-    create(input: AddSupplier): Observable<SupplierDto> {
+    create(input: AddSupplierDto): Observable<SupplierDto> {
         let url_ = this.baseUrl + "/api/services/app/Supplier/Create";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2206,7 +2378,6 @@ export class Fruitdto implements IFruitdto {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
-    supplierRefId: number;
     lastModificationTime: moment.Moment;
     lastModifierUserId: number;
     creationTime: moment.Moment;
@@ -2228,7 +2399,6 @@ export class Fruitdto implements IFruitdto {
             this.colour = data["colour"];
             this.stockAvailable = data["stockAvailable"];
             this.pricePerItem = data["pricePerItem"];
-            this.supplierRefId = data["supplierRefId"];
             this.lastModificationTime = data["lastModificationTime"] ? moment(data["lastModificationTime"].toString()) : <any>undefined;
             this.lastModifierUserId = data["lastModifierUserId"];
             this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
@@ -2249,7 +2419,6 @@ export class Fruitdto implements IFruitdto {
         data["colour"] = this.colour;
         data["stockAvailable"] = this.stockAvailable;
         data["pricePerItem"] = this.pricePerItem;
-        data["supplierRefId"] = this.supplierRefId;
         data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         data["lastModifierUserId"] = this.lastModifierUserId;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -2271,7 +2440,6 @@ export interface IFruitdto {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
-    supplierRefId: number;
     lastModificationTime: moment.Moment;
     lastModifierUserId: number;
     creationTime: moment.Moment;
@@ -2338,7 +2506,6 @@ export class AddFruit implements IAddFruit {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
-    supplierRefId: number;
 
     constructor(data?: IAddFruit) {
         if (data) {
@@ -2355,7 +2522,6 @@ export class AddFruit implements IAddFruit {
             this.colour = data["colour"];
             this.stockAvailable = data["stockAvailable"];
             this.pricePerItem = data["pricePerItem"];
-            this.supplierRefId = data["supplierRefId"];
         }
     }
 
@@ -2371,7 +2537,6 @@ export class AddFruit implements IAddFruit {
         data["colour"] = this.colour;
         data["stockAvailable"] = this.stockAvailable;
         data["pricePerItem"] = this.pricePerItem;
-        data["supplierRefId"] = this.supplierRefId;
         return data; 
     }
 
@@ -2388,7 +2553,6 @@ export interface IAddFruit {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
-    supplierRefId: number;
 }
 
 export class UpdateFruit implements IUpdateFruit {
@@ -2396,7 +2560,6 @@ export class UpdateFruit implements IUpdateFruit {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
-    supplierRefId: number;
     id: number;
 
     constructor(data?: IUpdateFruit) {
@@ -2414,7 +2577,6 @@ export class UpdateFruit implements IUpdateFruit {
             this.colour = data["colour"];
             this.stockAvailable = data["stockAvailable"];
             this.pricePerItem = data["pricePerItem"];
-            this.supplierRefId = data["supplierRefId"];
             this.id = data["id"];
         }
     }
@@ -2431,7 +2593,6 @@ export class UpdateFruit implements IUpdateFruit {
         data["colour"] = this.colour;
         data["stockAvailable"] = this.stockAvailable;
         data["pricePerItem"] = this.pricePerItem;
-        data["supplierRefId"] = this.supplierRefId;
         data["id"] = this.id;
         return data; 
     }
@@ -2449,7 +2610,6 @@ export interface IUpdateFruit {
     colour: string;
     stockAvailable: number;
     pricePerItem: number;
-    supplierRefId: number;
     id: number;
 }
 
@@ -2975,6 +3135,106 @@ export interface ITenantLoginInfoDto {
     id: number;
 }
 
+export class AddFruitDto implements IAddFruitDto {
+    fruitId: number;
+    supplierId: number;
+    price: number;
+
+    constructor(data?: IAddFruitDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.fruitId = data["fruitId"];
+            this.supplierId = data["supplierId"];
+            this.price = data["price"];
+        }
+    }
+
+    static fromJS(data: any): AddFruitDto {
+        let result = new AddFruitDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fruitId"] = this.fruitId;
+        data["supplierId"] = this.supplierId;
+        data["price"] = this.price;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new AddFruitDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAddFruitDto {
+    fruitId: number;
+    supplierId: number;
+    price: number;
+}
+
+export class UpdateFruitDto implements IUpdateFruitDto {
+    fruitId: number;
+    supplierId: number;
+    price: number;
+
+    constructor(data?: IUpdateFruitDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.fruitId = data["fruitId"];
+            this.supplierId = data["supplierId"];
+            this.price = data["price"];
+        }
+    }
+
+    static fromJS(data: any): UpdateFruitDto {
+        let result = new UpdateFruitDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fruitId"] = this.fruitId;
+        data["supplierId"] = this.supplierId;
+        data["price"] = this.price;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new UpdateFruitDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUpdateFruitDto {
+    fruitId: number;
+    supplierId: number;
+    price: number;
+}
+
 export class SupplierDto implements ISupplierDto {
     name: string;
     contact: string;
@@ -3103,13 +3363,13 @@ export interface IPagedResultDtoOfSupplierDto {
     items: SupplierDto[];
 }
 
-export class AddSupplier implements IAddSupplier {
+export class AddSupplierDto implements IAddSupplierDto {
     name: string;
     contact: string;
     phone: string;
     email: string;
 
-    constructor(data?: IAddSupplier) {
+    constructor(data?: IAddSupplierDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -3127,8 +3387,8 @@ export class AddSupplier implements IAddSupplier {
         }
     }
 
-    static fromJS(data: any): AddSupplier {
-        let result = new AddSupplier();
+    static fromJS(data: any): AddSupplierDto {
+        let result = new AddSupplierDto();
         result.init(data);
         return result;
     }
@@ -3144,13 +3404,13 @@ export class AddSupplier implements IAddSupplier {
 
     clone() {
         const json = this.toJSON();
-        let result = new AddSupplier();
+        let result = new AddSupplierDto();
         result.init(json);
         return result;
     }
 }
 
-export interface IAddSupplier {
+export interface IAddSupplierDto {
     name: string;
     contact: string;
     phone: string;

@@ -1,6 +1,6 @@
 import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { SupplierServiceProxy, AddSupplier } from '@shared/service-proxies/service-proxies';
+import { SupplierServiceProxy, AddSupplierDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 import * as _ from "lodash";
@@ -19,7 +19,7 @@ export class AddSupplierComponent extends AppComponentBase {
 
     active: boolean = false;
     saving: boolean = false;
-    suppliers: AddSupplier = new AddSupplier();
+    suppliers: AddSupplierDto = new AddSupplierDto();
 
     constructor(
         injector: Injector,
@@ -29,7 +29,7 @@ export class AddSupplierComponent extends AppComponentBase {
     }
 
     show(): void {
-        this.suppliers = new AddSupplier();
+        this.suppliers = new AddSupplierDto();
         this.modal.show();
     }
 

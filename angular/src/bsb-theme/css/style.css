@@ -2543,14 +2543,20 @@ section.content {
   overflow: hidden;
   width: 40px;
   height: 40px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
+  bottom: 30px;
   border-radius: 50%; }
   .btn-circle i {
     font-size: 18px;
     position: relative;
     left: -1px; }
+  
+    .btn-circle:hover{
+      box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.2), 0 15px 50px 0 rgba(0, 0, 0, 0.19);
+    }
 
 .btn-link {
   font-weight: bold;
@@ -3153,6 +3159,12 @@ section.content {
     .card .body .col-md-12,
     .card .body .col-lg-12 {
       margin-bottom: 20px; }
+
+      .card .footer {
+        color: #555;
+        padding: 20px;
+        position: relative;
+      }
 
 /* Infobox ===================================== */
 .info-box {
@@ -8153,4 +8165,18 @@ html.ie11 .bs-searchbox .form-control {
 
 .border {
   border-bottom: 1px solid lightgray;
+}
+
+.fixedPosition{
+  position: fixed;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: rgb(179, 239, 250);
+  transition: background-color 0.5s ease;
+}
+
+.hover-menu:hover {
+  background-color: rgb(179, 239, 250);
+  transition: background-color 0.5s ease;
 }

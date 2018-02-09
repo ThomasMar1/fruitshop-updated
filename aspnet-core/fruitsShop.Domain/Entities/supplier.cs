@@ -16,7 +16,9 @@ namespace fruitShop.Domain
         public string Contact { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public fruit
+
+        [InverseProperty("supplier")]
+        public ICollection<SupplierFruit> SupplierFruits { get; set; }
 
 
 

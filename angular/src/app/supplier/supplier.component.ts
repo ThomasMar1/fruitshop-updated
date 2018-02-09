@@ -39,17 +39,7 @@ export class SupplierComponent extends PagedListingComponentBase<SupplierDto> {
       });
   }
 
-  getSuppliers() {
-    this._supplierService.getAll('',0, 500)
 
-      .finally(() => {
-
-      })
-      .subscribe((result) => {
-        this.suppliers = result.items;
-      });
-
-  }
 
   delete(suppliers: SupplierDto): void {
     abp.message.confirm(
@@ -59,7 +49,7 @@ export class SupplierComponent extends PagedListingComponentBase<SupplierDto> {
           this._supplierService.delete(suppliers.id)
             .subscribe(() => {
               abp.notify.success("Deleted " + suppliers.name);
-              this.getSuppliers();
+              this.refresh();
             });
         }
       }

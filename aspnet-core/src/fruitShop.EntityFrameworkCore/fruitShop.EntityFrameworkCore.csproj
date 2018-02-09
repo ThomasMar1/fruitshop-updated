@@ -19,6 +19,7 @@
     <Compile Remove="Migrations\20180204004423_Foreign Keys.cs" />
     <Compile Remove="Migrations\20180205013728_SupplierRefId.cs" />
     <Compile Remove="Migrations\20180205023154_SupplierRefId2.cs" />
+    <Compile Remove="Migrations\20180206001236_Many to many6.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />

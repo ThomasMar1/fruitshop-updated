@@ -15,9 +15,10 @@ using System;
 namespace fruitShop.Migrations
 {
     [DbContext(typeof(fruitShopDbContext))]
-    partial class fruitShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180206001317_Many to many6")]
+    partial class Manytomany6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -805,7 +806,8 @@ namespace fruitShop.Migrations
             modelBuilder.Entity("fruitShop.Domain.fruit", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("fruitId");
 
                     b.Property<DateTime>("CreationTime");
 
@@ -857,7 +859,8 @@ namespace fruitShop.Migrations
             modelBuilder.Entity("fruitShop.Domain.supplier", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("supplierId");
 
                     b.Property<string>("Contact");
 
@@ -895,8 +898,6 @@ namespace fruitShop.Migrations
                     b.Property<DateTime?>("LastModificationTime");
 
                     b.Property<long?>("LastModifierUserId");
-
-                    b.Property<decimal>("Price");
 
                     b.HasKey("supplierId", "fruitId");
 
@@ -1078,7 +1079,7 @@ namespace fruitShop.Migrations
 
             modelBuilder.Entity("fruitShop.Domain.SupplierFruit", b =>
                 {
-                    b.HasOne("fruitShop.Domain.fruit")
+                    b.HasOne("fruitShop.Domain.fruit", "fruit")
                         .WithMany("SupplierFruits")
                         .HasForeignKey("fruitId")
                         .OnDelete(DeleteBehavior.Cascade);
