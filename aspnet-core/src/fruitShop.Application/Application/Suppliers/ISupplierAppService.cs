@@ -17,6 +17,9 @@ namespace fruitShop.Application.Suppliers
 
         Task<Boolean> deleteFruit(deleteFruitDto deletefruitDto);
 
+        Task<List<SupplierFruitDto>> GetFruits(Int32 supplierId);
+
+
 
 
     }

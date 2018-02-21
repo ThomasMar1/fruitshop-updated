@@ -254,14 +254,6 @@ export class FruitApplicationServiceProxy {
         return Observable.of<Fruitdto>(<any>null);
     }
 
-    /**
-     * @name (optional) 
-     * @colour (optional) 
-     * @lastModificationTime (optional) 
-     * @lastModifierUserId (optional) 
-     * @creatorUserId (optional) 
-     * @return Success
-     */
     getAll(sorting: string, skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfFruitdto> {
         let url_ = this.baseUrl + "/api/services/app/fruitApplication/GetAll?";
         if (sorting !== undefined)
@@ -1081,16 +1073,6 @@ export class SupplierServiceProxy {
         return Observable.of<SupplierDto>(<any>null);
     }
 
-    /**
-     * @name (optional) 
-     * @contact (optional) 
-     * @phone (optional) 
-     * @email (optional) 
-     * @lastModificationTime (optional) 
-     * @lastModifierUserId (optional) 
-     * @creatorUserId (optional) 
-     * @return Success
-     */
     getAll(sorting: string, skipCount: number, maxResultCount: number): Observable<PagedResultDtoOfSupplierDto> {
         let url_ = this.baseUrl + "/api/services/app/Supplier/GetAll?";
         if (skipCount === undefined || skipCount === null)
