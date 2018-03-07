@@ -93,24 +93,40 @@ namespace fruitShop.Application.Suppliers
 
         public async Task<List<SupplierFruitDto>> GetFruits(Int32 supplierId)
         {
+           CheckPermission(GetPermissionName);
+           fruitShopDbContext fruitContext = (fruitShopDbContext)base.Repository.GetDbContext();
+           IQueryable<SupplierFruitDto> entityQuery =
+           from SupplierFruit in fruitContext.SupplierFruits
+           where supplierId == SupplierFruit.supplierId
+           select new SupplierFruitDto
+           {
+               name = SupplierFruit.fruit.name,
+               colour = SupplierFruit.fruit.colour,
+               Price = SupplierFruit.Price,
+               fruitId = SupplierFruit.fruitId
+
+           };
+
+            return await entityQuery.ToListAsync();
+        }
+
+        public async Task<List<SupplierFruitDto>> GetAFruit(Int32 fruitId,Int32 supplierId)
+        {
             CheckPermission(GetPermissionName);
-
-            List<SupplierFruitDto> results = new List<SupplierFruitDto>();
-
-            supplier s = await this.Repository.GetAsync(supplierId);
-
-            // .. explicitely load the Application's Portfolio Links ..
-            DbContext context = base.Repository.GetDbContext();
-            context.Entry(s)
-                .Collection(x => x.SupplierFruits)
-                .Load();
-
-            foreach (SupplierFruit l in s.SupplierFruits)
+            fruitShopDbContext fruitContext = (fruitShopDbContext)base.Repository.GetDbContext();
+            IQueryable<SupplierFruitDto> entityQuery =
+            from SupplierFruit in fruitContext.SupplierFruits
+            where supplierId == SupplierFruit.supplierId && fruitId == SupplierFruit.fruitId
+            select new SupplierFruitDto
             {
-                results.Add(ObjectMapper.Map<SupplierFruitDto>(l));
-            }
+                name = SupplierFruit.fruit.name,
+                colour = SupplierFruit.fruit.colour,
+                Price = SupplierFruit.Price,
+                fruitId = SupplierFruit.fruitId
 
-            return results;
+            };
+
+            return await entityQuery.ToListAsync();
         }
 
 

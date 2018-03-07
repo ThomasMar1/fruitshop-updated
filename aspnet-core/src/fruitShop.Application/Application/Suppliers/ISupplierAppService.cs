@@ -19,6 +19,9 @@ namespace fruitShop.Application.Suppliers
 
         Task<List<SupplierFruitDto>> GetFruits(Int32 supplierId);
 
+        Task<List<SupplierFruitDto>> GetAFruit(Int32 fruitId, Int32 supplierId);
+
+
 
 
 

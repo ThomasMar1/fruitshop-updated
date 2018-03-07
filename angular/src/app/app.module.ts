@@ -45,6 +45,8 @@ import { EditSupplierComponent } from './supplier/edit-supplier/edit-supplier.co
 import { SelectSupplierComponent } from './fruit/select-supplier/select-supplier.component';
 import { ViewSupplierComponent } from './supplier/view-supplier/view-supplier.component';
 import { SupplierRootComponent } from 'app/supplier/supplier-root.component';
+import { EditSupplierFruitComponent } from './supplier/edit-supplier-fruit/edit-supplier-fruit.component';
+import { AddSupplierFruitComponent } from './supplier/add-supplier-fruit/add-supplier-fruit.component';
 
 
 @NgModule({
@@ -76,6 +78,8 @@ import { SupplierRootComponent } from 'app/supplier/supplier-root.component';
         SelectSupplierComponent,
         ViewSupplierComponent,
         SupplierRootComponent,
+        EditSupplierFruitComponent,
+        AddSupplierFruitComponent,
 
     
     ],

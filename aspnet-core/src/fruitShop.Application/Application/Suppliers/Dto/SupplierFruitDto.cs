@@ -9,10 +9,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace fruitShop.Application.Suppliers.Dto
 {
-    [AutoMapTo(typeof(SupplierFruit))]
     public class SupplierFruitDto
     {
+        public string name { get; set; }
+        public string colour { get; set; }
         public decimal Price { get; set; }
+        public int fruitId { get; set; }
+
 
     }
 }

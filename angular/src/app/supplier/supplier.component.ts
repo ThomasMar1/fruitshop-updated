@@ -43,7 +43,7 @@ export class SupplierComponent extends PagedListingComponentBase<SupplierDto> {
   }
 
 
-  delete(suppliers: SupplierDto): void {
+  protected delete(suppliers: SupplierDto): void {
     abp.message.confirm(
       "Delete '" + suppliers.name + "'?",
       (result: boolean) => {

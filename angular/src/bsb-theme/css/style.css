@@ -232,6 +232,8 @@ a{cursor: pointer;
 .col-deep-orange .navbar .nav .open > a:hover
  {
   background-color: rgba(83, 206, 255, 0.925);
+  transition: all 0.3s ease 0s;
+
   }
 
 .col-deep-orange .navbar .nav > li > a {
@@ -240,6 +242,7 @@ a{cursor: pointer;
 
  .col-deep-orange .navbar .nav > li.active{
   background-color: rgba(45, 101, 255, 0.897);
+
  }
 
 
@@ -2471,13 +2474,19 @@ a{cursor: pointer;
   .panel-switch-btn {
     top: 12px;
     right: 0 !important; } 
+
   }
+
+
 
 
   @media (min-width: 768px) {
     .navbar .nav > li > a {
       padding: 25px 15px 25px 15px;
 
+      }
+      #user{
+        width: 200px;
       }
   }
 
@@ -7508,4 +7517,16 @@ html.ie11 .bs-searchbox .form-control {
 
 .nav-item{
   background-color: rgb(179, 239, 250);
+}
+
+
+
+#menu{
+  word-break: break-all;
+  white-space: normal;
+}
+
+
+#clear:hover{
+  color: red;
 }
