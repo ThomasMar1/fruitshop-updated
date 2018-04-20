@@ -25,6 +25,8 @@ namespace fruitShop.Users
         private readonly RoleManager _roleManager;
         private readonly IRepository<Role> _roleRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IRepository<User, long> _userRepository;
+
 
         public UserAppService(
             IRepository<User, long> repository,
@@ -38,6 +40,7 @@ namespace fruitShop.Users
             _roleManager = roleManager;
             _roleRepository = roleRepository;
             _passwordHasher = passwordHasher;
+            _userRepository = repository;
         }
 
         public override async Task<UserDto> Create(CreateUserDto input)
@@ -101,6 +104,14 @@ namespace fruitShop.Users
             );
         }
 
+
+        public async Task<List<UserDto>> GetUsers(PagedResultRequestDto input)
+        {
+            var users = await _userRepository.GetAllListAsync(x =>!x.IsDeleted);
+            return new List<UserDto>(ObjectMapper.Map<List<UserDto>>(users));
+
+        }
+
         protected override User MapToEntity(CreateUserDto createInput)
         {
             var user = ObjectMapper.Map<User>(createInput);
@@ -136,6 +147,8 @@ namespace fruitShop.Users
         {
             return query.OrderBy(r => r.UserName);
         }
+
+
 
         protected virtual void CheckErrors(IdentityResult identityResult)
         {

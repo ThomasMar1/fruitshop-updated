@@ -23,6 +23,8 @@ export class EditSupplierFruitComponent  extends AppComponentBase implements OnI
   fruitId: number;
   supplierId: number;
   sf: SupplierFruitDto[] = [];
+  name: string;
+  colour: string;
 
 
 
@@ -37,12 +39,15 @@ export class EditSupplierFruitComponent  extends AppComponentBase implements OnI
   }
 
 
-  show(f:number, s:number): void {
-    this.fruitId = f;
-    this.supplierId = s
+  show(sf: SupplierFruitDto): void {
+
     this.fruit = new UpdateFruitDto();
+    this.fruit.price = sf.price;
+    this.name = sf.name;
+    this.colour = sf.colour;
+
     this.modal.show();
-    this.getAFruit();
+    //this.getAFruit();
 
   }
 

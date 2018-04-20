@@ -5,6 +5,7 @@ using Abp.AutoMapper;
 using fruitShop.Domain;
 using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
+using Abp.Authorization;
 
 namespace fruitShop.Application.Suppliers.Dto
 {

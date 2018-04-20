@@ -15,9 +15,10 @@ using System;
 namespace fruitShop.Migrations
 {
     [DbContext(typeof(fruitShopDbContext))]
-    partial class fruitShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180313223849_Permissions")]
+    partial class Permissions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

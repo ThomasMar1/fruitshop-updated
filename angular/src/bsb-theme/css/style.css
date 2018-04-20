@@ -7530,3 +7530,11 @@ html.ie11 .bs-searchbox .form-control {
 #clear:hover{
   color: red;
 }
+
+
+
+#welcome{
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

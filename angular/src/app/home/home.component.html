@@ -2,6 +2,18 @@
 
 
 
+    <div class="row clearfix">
+        <div class="lg-12">
+
+        </div>
+        <p *ngIf="hour < 12" class="text-center" id="welcome" >Good Morning {{shownLoginName}}!</p>
+        <p *ngIf="12 <= hour && hour < 18" class="text-center" id="welcome" >Good Afternoon {{shownLoginName}}!</p>
+
+
+        <p *ngIf="18 <= hour" class="text-center" id="welcome" >Good Evening {{shownLoginName}}!</p>
+
+        
+    </div>
     <!-- Widgets -->
     <div class="row clearfix">
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">

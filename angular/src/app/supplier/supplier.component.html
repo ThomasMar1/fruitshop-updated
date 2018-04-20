@@ -33,12 +33,12 @@
                             <th>Contact Person</th>
                             <th>Phone</th>
                             <th>Email Address</th>
-                            <th>Actions</th>
+                            <th *ngIf="editAllowed()">Actions</th>
 
                         </tr>
                     </thead>
 
-                    <tr *ngFor="let supplier of suppliers">
+                    <tr *ngFor="let supplier of suppliers | paginate: { id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
                         <td>
                             <a [routerLink]="['/app/supplier/detail', supplier.id]">{{supplier.name}}</a>
                         </td>

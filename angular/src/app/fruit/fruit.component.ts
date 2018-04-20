@@ -20,6 +20,7 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
     @ViewChild('editFruitModal') editFruitModal: EditFruitComponent;
 
     fruits: Fruitdto[] = [];
+    editPermission: string = 'Pages.Fruits.Update';
 
     constructor(
         injector: Injector,
@@ -38,7 +39,7 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
                 this.showPaging(result, pageNumber);
             });
     }
-    /*
+    
     getFruits() {
         this._fruitService.getAll('', 0, 500)
             .finally(() => {
@@ -47,7 +48,7 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
                 this.fruits = result.items;
             });
 
-    }*/
+    }
 
     warning(stock){
         if (stock == 0){
@@ -73,12 +74,28 @@ export class FruitComponent extends PagedListingComponentBase<Fruitdto> {
         );
     }
 
+    /*checkPermission(){
+        if this.permission.isGranted("Pages.Fruit.Update")
+    }*/
+
     // Show modals
     addFruit(): void {
         this.addFruitModal.show();
     }
 
-    editFruit(fruits: UpdateFruit): void {
+    editFruit(fruits: UpdateFruit) {
         this.editFruitModal.show(fruits.id);
+
+    }
+
+
+
+    editAllowed(){
+        if (this.editPermission) {
+            return this.permission.isGranted(this.editPermission);
+        }
+
+        return true;
+
     }
 }

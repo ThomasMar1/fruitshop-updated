@@ -16,6 +16,9 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
 
     active: boolean = false;
     users: UserDto[] = [];
+    unfilteredUsers: UserDto[] = [];
+    apples: UserDto[] = [];
+    i: number = 0;
 
     constructor(
         injector: Injector,
@@ -30,10 +33,19 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
                 finishedCallback();
             })
             .subscribe((result: PagedResultDtoOfUserDto) => {
+                //result.totalCount = 50;
                 this.users = result.items;
                 this.showPaging(result, pageNumber);
             });
+        
+            /*this._userService.getUsers(request.skipCount, request.maxResultCount)
+            .finally(() => {
+            })
+            .subscribe((result) => {
+                this.apples = result;
+            });*/
     }
+
 
     protected delete(user: UserDto): void {
         abp.message.confirm(
@@ -49,6 +61,8 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
             }
         );
     }
+
+
 
     // Show Modals
     createUser(): void {

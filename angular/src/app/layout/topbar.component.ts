@@ -13,10 +13,11 @@ import { RouterLinkActive } from '@angular/router';
 })
 export class TopBarComponent extends AppComponentBase implements OnInit {
     menuItems: MenuItem[] = [
-        new MenuItem(this.l("Home"), "", "home", "/app/home"),
-        new MenuItem(this.l("About"), "", "info", "/app/about"),
-        new MenuItem(this.l("Users"), "Pages.Users", "people", "/app/users"),
-        new MenuItem(this.l("Roles"), "Pages.Roles", "local_offer", "/app/roles"),
+        new MenuItem("Home", "", "home", "/app/home"),
+        new MenuItem("Users", "Pages.Users", "people", "/app/users"),
+        new MenuItem("Roles", "Pages.Roles", "local_offer", "/app/roles"),
+        new MenuItem("Fruit Stock", "", "list", "/app/fruit"),
+        new MenuItem("Suppliers", "Pages.Suppliers", "local_shipping", "/app/supplier/supplierlist"),
 
     ];
 
@@ -28,8 +29,19 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
         super(injector);
     }
 
+    showMenuItem(menuItem): boolean {
+        if (menuItem.permissionName) {
+            return this.permission.isGranted(menuItem.permissionName);
+        }
+
+        
+
+        return true;
+    }
+
     ngOnInit() {
         this.shownLoginName = this.appSession.getShownLoginName();
+        this.shownLoginName = this.shownLoginName.substring(2);
     }
 
     logout(): void {

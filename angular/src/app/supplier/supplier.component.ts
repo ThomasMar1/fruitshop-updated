@@ -22,6 +22,8 @@ export class SupplierComponent extends PagedListingComponentBase<SupplierDto> {
   hidden = false;
 
   suppliers: SupplierDto[] = [];
+  editPermission: string = 'Pages.Suppliers.Update';
+
 
   constructor(
     injector: Injector,
@@ -66,6 +68,15 @@ export class SupplierComponent extends PagedListingComponentBase<SupplierDto> {
   editSupplier(suppliers: UpdateSupplier): void {
     this.editSupplierModal.show(suppliers.id);
   }
+
+  editAllowed(){
+    if (this.editPermission) {
+        return this.permission.isGranted(this.editPermission);
+    }
+
+    return true;
+
+}
 
 
 

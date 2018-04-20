@@ -55,7 +55,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li [routerLinkActive]="['active']">
+                    <!--<li [routerLinkActive]="['active']">
                         <a [routerLink]="['/app/home']">Home</a>
                     </li>
                     <li [routerLinkActive]="['active']">
@@ -70,7 +70,25 @@
                     <li [routerLinkActive]="['active']">
                         <a [routerLink]="['/app/supplier/supplierlist']" [routerLinkActive]="['active-link']">Supplier List</a>
                     </li>
-                </ul>
+                </ul>-->
+                <ng-template ngFor let-menuItem [ngForOf]="menuItems" let-mainMenuItemIndex="index">
+                        <li *ngIf="showMenuItem(menuItem)" routerLinkActive="active">
+                            <!-- route name -->
+                            <a class="hover-menu" [routerLink]="[menuItem.route]" *ngIf="!menuItem.items && menuItem.route.indexOf('http') != 0">
+                                <span>{{menuItem.name}}</span>
+                            </a>
+                            <!-- Static link (starts with 'http') -->
+                            <a href="{{menuItem.route}}" target="_blank" *ngIf="!menuItem.items  && menuItem.route.indexOf('http') == 0">
+                                <span>{{menuItem.name}}</span>
+                            </a>
+                            <!-- Has child menu items (so, this is a parent menu) -->
+                            <a href="javascript:void(0);" class="menu-toggle" *ngIf="menuItem.items">
+                                <span>{{menuItem.name}}</span>
+                            </a>
+                            
+                        </li>
+                    </ng-template>
+                    </ul>
                 <ul class="nav navbar-nav navbar-right">
 
                     <li [routerLinkActive]="['active']" class="dropdown">

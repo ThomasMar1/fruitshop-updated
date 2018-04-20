@@ -1,5 +1,7 @@
 import { Component, Injector, AfterViewInit } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
+import { AppAuthService } from '@shared/auth/app-auth.service';
+
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({
@@ -7,6 +9,11 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
     animations: [appModuleAnimation()]
 })
 export class HomeComponent extends AppComponentBase implements AfterViewInit {
+    today: any;
+    hour: any;
+    shownLoginName: string = "";
+    substring: string = "";
+
 
     constructor(
         injector: Injector
@@ -14,7 +21,18 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
         super(injector);
     }
 
+    getCurrentHour(){
+        this.today = new Date();
+        this.hour = this.today.getHours();
+        return this.hour;
+    }
+
     ngAfterViewInit(): void {
+
+        this.getCurrentHour();
+        this.shownLoginName = this.appSession.getShownLoginName();
+        this.shownLoginName = this.shownLoginName.substring(2);
+
 
         $(function () {
             //Widgets count
@@ -31,6 +49,7 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
             initDonutChart();
             initSparkline();
         });
+
 
         var realtime = 'on';
         function initRealTimeChart() {
@@ -132,5 +151,8 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
 
             return res;
         }
+
+
+
     }
 }

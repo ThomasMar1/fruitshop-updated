@@ -10,9 +10,6 @@ namespace fruitShop.Domain
     [Table("dSupplierFruit")]
     public class SupplierFruit : AuditedEntity<Int32>
     {
-
-
-
         public SupplierFruit(supplier s) {
             if (s == null)
             {
@@ -37,15 +34,12 @@ namespace fruitShop.Domain
         public int fruitId { get; set; }
 
 
-
         #endregion
 
         #region Properties
 
         [Required()]
         public decimal Price { get; set; }
-
-
 
         #endregion
 

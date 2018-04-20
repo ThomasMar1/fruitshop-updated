@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
             <h4> Details
-              <a href="javascript:void(0);" (click)="editSupplier(suppliers)">
+              <a *ngIf="editAllowed()" href="javascript:void(0);" (click)="editSupplier(suppliers)">
                 <i class="material-icons pull-right">create</i>
               </a>
             </h4>
@@ -40,7 +40,7 @@
         <div class="row ">
           <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
             <h4>Supplied Fruits
-              <a href="javascript:void(0);" (click)="addSupplierFruit()">
+              <a *ngIf="editAllowed()" href="javascript:void(0);" (click)="addSupplierFruit()">
                 <i class="material-icons md-24 pull-right">add_box</i>
               </a>
             </h4>
@@ -97,12 +97,6 @@
             </div>
           </div>
         </div>
-
-        <button class="btn btn-danger m-t-30" (click)="deleteSupplier(id)">
-          Delete Supplier
-        </button>
-
-
 
       </div>
     </div>

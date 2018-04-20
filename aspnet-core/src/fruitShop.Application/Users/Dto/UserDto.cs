@@ -29,6 +29,8 @@ namespace fruitShop.Users.Dto
 
         public bool IsActive { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public string FullName { get; set; }
 
         public DateTime? LastLoginTime { get; set; }

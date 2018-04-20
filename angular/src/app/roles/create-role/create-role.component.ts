@@ -30,7 +30,12 @@ export class CreateRoleComponent extends AppComponentBase implements OnInit {
             .subscribe((permissions: ListResultDtoOfPermissionDto) => {
                 this.permissions = permissions;
             });
+        
+            
+            
     }
+
+
 
     show(): void {
         this.active = true;

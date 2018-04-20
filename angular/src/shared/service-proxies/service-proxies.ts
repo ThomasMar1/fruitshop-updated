@@ -2119,6 +2119,70 @@ export class UserServiceProxy {
     /**
      * @return Success
      */
+    getUsers(skipCount: number, maxResultCount: number): Observable<UserDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/User/GetUsers?";
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processGetUsers(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processGetUsers(<any>response_);
+                } catch (e) {
+                    return <Observable<UserDto[]>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<UserDto[]>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processGetUsers(response: Response): Observable<UserDto[]> {
+        const status = response.status;
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(UserDto.fromJS(item));
+            }
+            return Observable.of(result200);
+        } else if (status === 401) {
+            const _responseText = response.text();
+            return throwException("A server error occurred.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.text();
+            return throwException("A server error occurred.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<UserDto[]>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
     get(id: number): Observable<UserDto> {
         let url_ = this.baseUrl + "/api/services/app/User/Get?";
         if (id === undefined || id === null)
@@ -4123,6 +4187,7 @@ export class UserDto implements IUserDto {
     surname: string;
     emailAddress: string;
     isActive: boolean;
+    isDeleted: boolean;
     fullName: string;
     lastLoginTime: moment.Moment;
     creationTime: moment.Moment;
@@ -4145,6 +4210,7 @@ export class UserDto implements IUserDto {
             this.surname = data["surname"];
             this.emailAddress = data["emailAddress"];
             this.isActive = data["isActive"];
+            this.isDeleted = data["isDeleted"];
             this.fullName = data["fullName"];
             this.lastLoginTime = data["lastLoginTime"] ? moment(data["lastLoginTime"].toString()) : <any>undefined;
             this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
@@ -4170,6 +4236,7 @@ export class UserDto implements IUserDto {
         data["surname"] = this.surname;
         data["emailAddress"] = this.emailAddress;
         data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
         data["fullName"] = this.fullName;
         data["lastLoginTime"] = this.lastLoginTime ? this.lastLoginTime.toISOString() : <any>undefined;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -4196,6 +4263,7 @@ export interface IUserDto {
     surname: string;
     emailAddress: string;
     isActive: boolean;
+    isDeleted: boolean;
     fullName: string;
     lastLoginTime: moment.Moment;
     creationTime: moment.Moment;

@@ -8,16 +8,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace fruitShop.Domain
+
+ /* Fruits Database */
+
 {
-    [Table("dFruit")]
-    public class fruit: AuditedEntity<Int32>  /*Inherits from timestamp class*/
+    [Table("dFruit")]                           /*The table will be caled 'dFruit'*/
+    public class fruit: AuditedEntity<Int32>    /*Inherits from timestamp class*/
     {
         public string name { get; set; }
         public string colour { get; set; }
         public int stockAvailable { get; set; }
         public decimal pricePerItem { get; set; }
 
-        public ICollection<SupplierFruit> SupplierFruits { get; set; }
+        public ICollection<SupplierFruit> SupplierFruits { get; set; }      /*FK to SupplierFruits table*/
 
 
 

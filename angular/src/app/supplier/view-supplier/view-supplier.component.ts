@@ -30,6 +30,7 @@ export class ViewSupplierComponent extends AppComponentBase implements OnInit, O
   @ViewChild('addSupplierFruitModal') addSupplierFruitModal: AddSupplierFruitComponent;
   @ViewChild('editSupplierFruitModal') editSupplierFruitModal: EditSupplierFruitComponent;
 
+  editPermission: string = 'Pages.Suppliers.Update';
 
 
   @Input() id: number;
@@ -98,7 +99,7 @@ export class ViewSupplierComponent extends AppComponentBase implements OnInit, O
 
   editSupplierFruit(fruit: SupplierFruitDto): void{
     this.val = fruit.fruitId;
-    this.editSupplierFruitModal.show(this.val, this.id);
+    this.editSupplierFruitModal.show(fruit);
   }
 
 
@@ -107,9 +108,7 @@ export class ViewSupplierComponent extends AppComponentBase implements OnInit, O
     this._supplierService.getFruits(this.id)
       .subscribe((results: SupplierFruitDto[]) => {
         this.sf = results;
-
       });
-
   }
 
   deleteSupplier(id: number) {
@@ -133,6 +132,15 @@ export class ViewSupplierComponent extends AppComponentBase implements OnInit, O
     );
 
   }
+
+  editAllowed(){
+    if (this.editPermission) {
+        return this.permission.isGranted(this.editPermission);
+    }
+
+    return true;
+
+}
 
 
   

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using Abp.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
+/* Suppliers of the fruit shop database */
 
 namespace fruitShop.Domain
 {
