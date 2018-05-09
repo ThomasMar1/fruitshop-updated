@@ -1,3 +1,14 @@
+# Fruit Shop
+
+- This is a basic inventory style web application using EF Code First and C# .NET connected to a local SQL Server database to produce a RESful back-end web service. 
+
+- The RESTful web service produced through the Swagger API framework which is then consumed by the Angular 5 front-end allowing the data to be displayed and processed accordingly.
+
+
+
+----------------------------
+
+
 # Introduction
 
 This is a template to create **ASP.NET Core MVC / Angular** based startup projects for [ASP.NET Boilerplate](https://aspnetboilerplate.com/Pages/Documents). It has 2 different versions:
@@ -11,17 +22,6 @@ User Interface is based on [BSB Admin theme](https://github.com/gurayyarar/Admin
 
 Create & download your project from https://aspnetboilerplate.com/Templates
 
-# Screenshots
-
-#### Sample Dashboard Page
-![](_screenshots/module-zero-core-template-ui-home.png)
-
-#### User Creation Modal
-![](_screenshots/module-zero-core-template-ui-user-create-modal.png)
-
-#### Login Page
-
-![](_screenshots/module-zero-core-template-ui-login.png)
 
 # Documentation
 
